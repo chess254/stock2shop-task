@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "226d0bde-a11a-4385-8e70-8eac56802caf",
+		"name": "stock2shopTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15151950"
+	},
+	"item": [
+		{
+			"name": "localhost:8000/api/products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sku\": \"z9DQb22xruyi1oJiEJjX\",\r\n    \"attributes\": {\r\n        \"a\": \"Alpha\",\r\n        \"b\": \"Bravo\",\r\n        \"c\": \"Charlie\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/api/products"
+			},
+			"response": []
+		}
+	]
+}

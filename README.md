@@ -70,7 +70,8 @@ $ php artisan serve
 
 ## Testing the api endpoints
 
--You can use [postman](https://www.postman.com/downloads/) or [insomnia](https://insomnia.rest/download) to test the following endpoints.
+- You can use [postman](https://www.postman.com/downloads/) or [insomnia](https://insomnia.rest/download) to test the following endpoints.
+- Note: There is a file in the root folder of this project named stock2shopTest.postman_collection.json, you can import this collection to postman to get the endpoints and payloads faster. 
 
 | HTTP VERB      | Path                           | 
 | -------------- | ------------------------------ | 
