@@ -75,7 +75,105 @@ $ php artisan serve
 
 ## Testing the api endpoints
 
--You can use [postman]() or insomnia[]() to test the following endpoints.
+-You can use [postman](https://www.postman.com/downloads/) or [insomnia](https://insomnia.rest/download) to test the following endpoints.
+
+| HTTP VERB      | Path                           | 
+| -------------- | ------------------------------ | 
+| POST           | localhost:8000/api/products    |
+
+- Request
+```    
+    { 
+            "sku": "z9DQb22xruyi1oJiEJjX",
+            "attributes": {
+                "a": "Alpha",
+                "b": "Bravo",
+                "c": "Charlie"
+            }
+    }
+```    
+- response HTTP status: 200 OK
+```    
+    { 
+            "sku": "z9DQb22xruyi1oJiEJjX",
+            "attributes": {
+                "a": "Alpha",
+                "b": "Bravo",
+                "c": "Charlie"
+            }
+    }
+```   
+
+- This is the response when a product is posted with sku value that violates the unique constraint (i.e an sku value that already exists in the database)
+- - response HTTP status: 400 BAD REQUEST
+```    
+    {
+        "sku": [
+            "The sku has already been taken."
+        ]
+    }
+``` 
+
+
+| HTTP VERB      | Path                           | 
+| -------------- | ------------------------------ | 
+| GET            | localhost:8000/api/products    |
+
+- response HTTP status: 200 OK
+```    
+    {
+    "current_page": 1,
+    "data": [
+        {
+            "sku": "b7wuQOjmcXdGKJQ2XLWb",
+            "attributes": {
+                "1": "One",
+                "2": "Two",
+                "3": "Three"
+            }
+        },
+        {
+            "sku": "RZhJgBx6BpQ0LYAi2gXM",
+            "attributes": {
+                "testA": "Alpha",
+                "Btest": "Bravo",
+                "TESTC": "Charlie"
+            }
+        }
+    ],
+    "first_page_url": "http://localhost:8000/api/products?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http://localhost:8000/api/products?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "http://localhost:8000/api/products?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "http://localhost:8000/api/products",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 2,
+    "total": 2
+}
+```    
+Note: for getting a list of products, the required data is found in the "data" property of the response object. 
+Pagination is included when getting the list of products to help chunk the list into small sizes as the list grows. This can improve performance. 
+There is also metadata and links for loading previous page (if there are multiple), loading first, last, current and next page and also total number of products in the database.
+
 
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
