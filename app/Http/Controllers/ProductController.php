@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         
-    return Product::all()->paginate(10);
+    return Product::paginate(10);
     }
 
     /**
@@ -36,11 +36,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $company = new Company($request->all());
-        $company->password = "password";
-        $company->save();
+        $product = new Product($request->all());
+        $product->save();
 
-        return $company;
+        return $product;
     }
 
     /**
