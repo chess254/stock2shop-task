@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Symfony\Component\HttpFoundation\Response as HTTP_STATUS;
 
 class ProductController extends Controller
 {
@@ -36,10 +38,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product($request->all());
-        $product->save();
+        $validator = FacadesValidator::make($request->all(), [
+            'sku' => 'required|string|unique:products',
+        ]);
 
-        return $product;
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response( $errors->toJson(), HTTP_STATUS::HTTP_BAD_REQUEST);
+        } else {
+            $product = new Product($request->all());
+            $product->save();
+    
+            return response(
+                $product->fresh()
+                , HTTP_STATUS::HTTP_OK);
+        }
+
+        // $product = new Product($request->all());
+        // $product->save();
+
+        // return $product;
     }
 
     /**

@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    // public $timestamps = false;
+
     /**
     * The attributes that aren't mass assignable.
     *
@@ -17,7 +19,9 @@ class Product extends Model
     protected $guarded = [];
 
     protected $hidden = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at'
     ];
 
     // public function jobs(){
