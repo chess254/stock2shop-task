@@ -7,21 +7,76 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Getting Started
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+
+- [Install php verion 8.0 or later](https://www.php.net/downloads.php).
+- [Install MySQL](https://dev.mysql.com/downloads/).
+- [Install git](https://git-scm.com/downloads).
+- [Install Composer](https://getcomposer.org/download/).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Running the project
+
+### Clone from github
+- Navigate to desired folder and clone using this command
+```
+git clone https://github.com/chess254/stock2shop-task.git && cd stock2shop-task
+```
+<!-- - then
+```
+cd ./stock2shop
+``` -->
+- to install the required packages run 
+```
+composer update
+composer install
+```
+- create .env file from .env.example.env
+```
+cp .env.example .env    //for mac and linux
+copy .env.example .env  //for windows
+```
+- [create a new MySQL database](https://www.mysqltutorial.org/mysql-create-database/) that will be used to persist the data be sure to note the database name, username and password.
+- modify the newly created .env file specifying the correct values for the following fields
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=YOUR LOCAL DATABASE NAME GOES HERE
+DB_USERNAME=YOUR MYSQL DATABASE USERNAME GOES HERE
+DB_PASSWORD=THE DATABASE PASSWORD FOR THE USER SPECIFIED ABOVE
+```
+- generate App key
+```
+php artisan key:generate
+```
+- run the migrations (either)
+```
+php artisan migrate //will set up empty products table
+```
+alternatively you can run the migrations with sample seed data
+```
+php artisan migrate:fresh --seed
+```
+- start the server
+```
+php artisan serve
+```
+- you should see...
+```
+$ php artisan serve
+   INFO  Server running on [http://127.0.0.1:8000].
+
+  Press Ctrl+C to stop the server
+```
+
+## Testing the api endpoints
+
+-You can use [postman]() or insomnia[]() to test the following endpoints.
+
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
