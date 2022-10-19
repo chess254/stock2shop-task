@@ -44,7 +44,7 @@ class ProductController extends Controller
 
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return response( $errors->toJson(), HTTP_STATUS::HTTP_BAD_REQUEST);
+            return response( $errors, HTTP_STATUS::HTTP_BAD_REQUEST);
         } else {
             $product = new Product($request->all());
             $product->save();
