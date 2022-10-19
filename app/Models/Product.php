@@ -24,10 +24,6 @@ class Product extends Model
         'updated_at'
     ];
 
-    // public function jobs(){
-    //     return $this->hasMany(Vacancy::class);
-    // }
-
     protected $casts = [
         'attributes' => 'object'
     ];

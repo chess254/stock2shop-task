@@ -50,7 +50,7 @@ php artisan key:generate
 ```
 - run the migrations (either)
 ```
-php artisan migrate //will set up empty products table
+php artisan migrate:fresh //will set up empty products table
 ```
 alternatively you can run the migrations with sample seed data
 ```

@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->json('attributes')->nullable();
             $table->timestamps();
-            // $table->string('name');
-            // $table->timestamp('email_verified_at')->nullable();
-            // $table->string('password');
         });
     }
 
