@@ -183,6 +183,6 @@ The reason I did not use one to many relationship is because the number of key-v
 - I chose to use Laravel framework because i prefer convention over configuration: Laravel has well defined conventions for handling common use cases, it has very good documentation and a vibrant community that maintains it. It is also open source.
 
 ### Further considerations
--Route and configuration caching can help improve performance as the application grows.
--Eager loading can also be used as the models aquire complex relationships (as compared to lazy loading) to improve performance by avoiding the N+1 problem.
--As the application grows, Events and Queues can be used for tasks that need time to run, so that they can be done asynchronously and the user is provided immediate feedback then updated when the long running task is done( for example compressing images before storage ).
+- Route and configuration caching can help improve performance as the application grows.
+- Eager loading can also be used as the models aquire complex relationships (as compared to lazy loading) to improve performance by avoiding the N+1 problem.
+- As the application grows, Events and Queues can be used for tasks that need time to run, so that they can be done asynchronously and the user is provided immediate feedback then updated when the long running task is done( for example compressing images before storage ).
