@@ -92,6 +92,8 @@ $ php artisan serve
             }
     }
 ```    
+Note: the number of "key":"value" pairs under attributes is variable, also, they can contain any string.
+
 - response HTTP status: 200 OK
 ```    
     { 
@@ -104,8 +106,8 @@ $ php artisan serve
     }
 ```   
 
-- This is the response when a product is posted with sku value that violates the unique constraint (i.e an sku value that already exists in the database)
-- - response HTTP status: 400 BAD REQUEST
+- The following is the response when a product is posted with sku value that violates the unique constraint (i.e an sku value that already exists in the database)
+- response HTTP status: 400 BAD REQUEST
 ```    
     {
         "sku": [
@@ -169,51 +171,22 @@ $ php artisan serve
     "to": 2,
     "total": 2
 }
-```    
-Note: for getting a list of products, the required data is found in the "data" property of the response object. 
-Pagination is included when getting the list of products to help chunk the list into small sizes as the list grows. This can improve performance. 
-There is also metadata and links for loading previous page (if there are multiple), loading first, last, current and next page and also total number of products in the database.
+```   
+#### Note
+- When getting a list of products, the required data is found in the "data" property of the response object. 
+- Pagination is included when getting the list of products to help chunk the list into small sizes as the list grows. This can improve performance. 
+- There is also metadata and links for loading previous page (if there are multiple), loading first, last, current and next page and also total number of products in the database.
 
+## Rationale
 
+- I chose to store the attributes field in a mysql JSON datatype (and use casting when fetching) as compared to using relationships or Json string (this was used in earlier versions of mysql).
+The reason I did not use one to many relationship is because the number of key-values pairs under attributes field are variable for different products.
+- I used the default laravel pagination when listing products to help in performance as the list of products grows.
+- Id and timestamps are in the database, but do not get displayed when listing products.
+- SKU field is validated when POSTing a product to make sure its unique, if not unique a custom json error message is returned (not the default html stack trace).
+- I chose to use Laravel framework because i prefer convention over configuration: Laravel has well defined conventions for handling common use cases, it has very good documentation and a vibrant community that maintains it. It is also open source.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Further considerations
+-Route and configuration caching can help improve performance as the application grows.
+-Eager loading can also be used as the models aquire complex relationships (as compared to lazy loading) to improve performance by avoiding the N+1 problem.
+-As the application grows, Events and Queues can be used for tasks that need time to run, so that they can be done asynchronously and the user is provided immediate feedback then updated when the long running task is done( for example compressing images before storage ).
