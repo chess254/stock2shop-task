@@ -53,11 +53,6 @@ class ProductController extends Controller
                 $product->fresh()
                 , HTTP_STATUS::HTTP_CREATED);
         }
-
-        // $product = new Product($request->all());
-        // $product->save();
-
-        // return $product;
     }
 
     /**
